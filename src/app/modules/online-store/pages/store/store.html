@@ -1,0 +1,83 @@
+<div class="container px-5">
+  <div class="row">
+
+    <div class="col-12">
+      <div class="d-flex flex-row-reverse">
+        <p-button
+          outlined
+          severity="secondary"
+          icon="pi pi-shopping-cart"
+          [badge]="productCount"
+          (click)="showCart = true"/>
+      </div>
+    </div>
+    @for (product of products(); track product.id) {
+
+      <div class="col-2">
+        <p-card>
+          <ng-template #header>
+            <img alt="Card" class="w-full" [src]="product.image" />
+          </ng-template>
+          <div class="d-flex flex-column">
+            <div class="text-balance font-lg">
+              {{product.description}}
+            </div>
+            <div class="font-bold font-lg">
+              {{product.price | currency}}
+            </div>
+          </div>
+          <ng-template #footer>
+            <div class="flex gap-4 mt-1">
+              <p-button fluid label="Agregar al carrito" severity="secondary" (click)="onAddToCart(product)"/>
+            </div>
+          </ng-template>
+        </p-card>
+      </div>
+    }
+
+  </div>
+</div>
+
+<p-drawer header="Resumen de compra" [(visible)]="showCart" position="right">
+  <div class="d-flex flex-column">
+
+    @for (product of productsCart(); track product.productId) {
+      <div class="pb-2">
+        <p-card>
+          <div class="d-flex flex-column">
+            <div class="text-balance text-sm">
+              {{product.productName}}
+            </div>
+            <div class="font-bold text-sm pb-1">
+              {{product.productPrice | currency}}
+            </div>
+            <p-button
+              size="small"
+              rounded
+              label="Eliminar"
+              icon="pi pi-trash"
+              severity="danger"
+              (click)="onDelete(product)"/>
+          </div>
+        </p-card>
+      </div>
+    } @empty {
+      <div class="text-balance font-lg">
+        Aún no ha agregado productos al carrito
+      </div>
+    }
+
+    @if (total() > 0) {
+      <div class="text-balance text-lg pb-4">
+        Total: {{ total() | currency }}
+      </div>
+      <p-button
+        size="small"
+        rounded
+        label="Comprar ahora"
+        severity="success"
+        (click)="onSubmit()"/>
+    }
+
+  </div>
+</p-drawer>

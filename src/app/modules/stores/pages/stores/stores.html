@@ -1,0 +1,71 @@
+<div class="container">
+  <p-card>
+    <p-table
+      #table
+      [value]="stores()"
+      dataKey="id"
+      [globalFilterFields]="['name', 'address', 'createdAt']"
+      [paginator]="true"
+      [rows]="10"
+      [rowsPerPageOptions]="[10, 20, 30, 50, 100]"
+      size="small"
+      stripedRows>
+      <ng-template #caption>
+        <div class="d-flex justify-content-between">
+          <p-button outlined severity="secondary" icon="pi pi-plus" label="Nuevo" (click)="onAdd()" />
+          <p-icon-field iconPosition="left">
+            <p-inputicon>
+              <i class="pi pi-search"></i>
+            </p-inputicon>
+            <input pInputText [style]="{'width': '400px'}" (input)="table.filterGlobal($event.target.value, 'contains')" placeholder="Buscar" />
+          </p-icon-field>
+        </div>
+      </ng-template>
+      <ng-template #header>
+        <tr>
+          <th>Nombre</th>
+          <th>Dirección</th>
+          <th>Fecha de alta</th>
+          <th>Acciones</th>
+        </tr>
+      </ng-template>
+      <ng-template #body let-store>
+        <tr>
+          <td>{{ store.name }}</td>
+          <td>{{ store.address }}</td>
+          <td>{{ store.createdAt | date:'short' }}</td>
+          <td>
+            <p-button class="mr-2" icon="pi pi-pencil" (click)="onEdit(store)" severity="secondary" rounded />
+            <p-button icon="pi pi-trash" (click)="onDelete(store)" severity="danger" rounded />
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </p-card>
+</div>
+
+<p-dialog
+  [header]="title"
+  [modal]="true"
+  [(visible)]="visible"
+  [style]="{ width: '20rem' }"
+  (onHide)="onHide()">
+  <form class="d-flex flex-column" [formGroup]="storeForm" (ngSubmit)="onSubmit()">
+
+    <div class="flex flex-column gap-1 mb-2">
+      <label for="name">Nombre</label>
+      <input pInputText id="name" formControlName="name"/>
+    </div>
+
+    <div class="flex flex-column gap-1 mb-2">
+      <label for="address">Dirección</label>
+      <input pInputText id="address" formControlName="address"/>
+    </div>
+
+    <div class="d-flex justify-content-end gap-2 pt-2">
+      <p-button label="Cancel" severity="secondary" (click)="visible = false" />
+      <p-button label="Save" (click)="onSubmit()" />
+    </div>
+
+  </form>
+</p-dialog>

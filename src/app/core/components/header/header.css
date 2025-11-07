@@ -1,0 +1,8 @@
+::ng-deep .p-toolbar {
+  background: #1e3a8a !important; /* Azul rey oscuro */
+  border-color: #1e40af !important;
+}
+
+::ng-deep .p-toolbar * {
+  color: white !important;
+}

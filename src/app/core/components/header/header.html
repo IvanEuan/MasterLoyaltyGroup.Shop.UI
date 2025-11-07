@@ -1,0 +1,14 @@
+<p-toolbar class="m-2" [style]="{ 'border-radius': '3rem', 'padding': '0.5rem 0.5rem 0.5rem 0.5rem' }">
+  <ng-template #start>
+    <div class="text-lg font-bold ml-2 mr-5">
+      Prueba desarrollador .NET
+    </div>
+    <p-button label="Clientes" icon="pi pi-users" class="mr-2" text (click)="navigateTo('/home/customers')"/>
+    <p-button label="Tiendas" icon="pi pi-shop" class="mr-2" text (click)="navigateTo('/home/stores')"/>
+    <p-button label="Productos" icon="pi pi-list" text (click)="navigateTo('/home/products')"/>
+    <p-button label="Tienda online" icon="pi pi-shopping-bag" text (click)="navigateTo('/home/online-shop')"/>
+  </ng-template>
+  <ng-template #end>
+    <p-button icon="pi pi-sign-out" text (click)="logout()"/>
+  </ng-template>
+</p-toolbar>

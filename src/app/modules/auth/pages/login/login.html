@@ -1,0 +1,46 @@
+<div class="container-fluid d-flex h-100">
+
+  <form class="w-100 m-auto auth-form p-3" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <div class="row flex-column row-cols-1 gy-1 py-5 mx-3">
+      <div class="col text-center">
+        <h2>Master Loyalty Group</h2>
+      </div>
+      <div class="col text-center">
+        <h5>Bienvenido</h5>
+      </div>
+      <div class="col">
+        <input
+          pInputText
+          class="p-rounded"
+          type="text"
+          fluid
+          formControlName="email"
+          placeholder="Correo electrónico"
+          [invalid]="isInvalid('email')"/>
+      </div>
+      <div class="col">
+        <p-password
+          type="text"
+          fluid
+          [feedback]="false"
+          [inputStyle]="{'border-radius': '30px'}"
+          formControlName="password"
+          placeholder="Contraseña"
+          [toggleMask]="true"
+          [invalid]="isInvalid('password')"/>
+      </div>
+      <div class="col pt-3">
+        <p-button
+          type="submit"
+          class="w-100"
+          styleClass="w-100"
+          label="Iniciar sesión"
+          [rounded]="true"
+          severity="info"
+          fluid>
+        </p-button>
+      </div>
+    </div>
+  </form>
+
+</div>

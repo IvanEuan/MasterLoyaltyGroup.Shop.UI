@@ -1,0 +1,90 @@
+<div class="container">
+  <p-card>
+    <p-table
+      #table
+      [value]="customers()"
+      dataKey="id"
+      [globalFilterFields]="['firstName', 'lastName', 'address', 'email', 'createdAt']"
+      [paginator]="true"
+      [rows]="5"
+      [rowsPerPageOptions]="[5, 10, 20, 30, 50, 100]"
+      size="small"
+      stripedRows>
+      <ng-template #caption>
+        <div class="d-flex justify-content-between">
+          <p-button outlined severity="secondary" icon="pi pi-plus" label="Nuevo" (click)="onAdd()" />
+          <p-icon-field iconPosition="left">
+            <p-inputicon>
+              <i class="pi pi-search"></i>
+            </p-inputicon>
+            <input pInputText [style]="{'width': '400px'}" (input)="table.filterGlobal($event.target.value, 'contains')" placeholder="Buscar" />
+          </p-icon-field>
+        </div>
+      </ng-template>
+      <ng-template #header>
+        <tr>
+          <th>Nombres</th>
+          <th>Apellidos</th>
+          <th>Domicilio</th>
+          <th>Correo electrónico</th>
+          <th>Fecha de alta</th>
+          <th>Acciones</th>
+        </tr>
+      </ng-template>
+      <ng-template #body let-customer>
+        <tr>
+          <td>{{ customer.firstName }}</td>
+          <td>{{ customer.lastName }}</td>
+          <td>{{ customer.address }}</td>
+          <td>{{ customer.email }}</td>
+          <td>{{ customer.createdAt | date:'short' }}</td>
+          <td>
+            <p-button class="mr-2" icon="pi pi-pencil" (click)="onEdit(customer)" severity="secondary" rounded />
+            <p-button icon="pi pi-trash" (click)="onDelete(customer)" severity="danger" rounded />
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </p-card>
+</div>
+
+<p-dialog
+  [header]="title"
+  [modal]="true"
+  [(visible)]="visible"
+  [style]="{ width: '20rem' }"
+  (onHide)="onHide()">
+  <form class="d-flex flex-column" [formGroup]="customerForm" (ngSubmit)="onSubmit()">
+
+    <div class="flex flex-column gap-1 mb-2">
+      <label for="firstName">Nombres</label>
+      <input pInputText id="firstName" formControlName="firstName"/>
+    </div>
+
+    <div class="flex flex-column gap-1 mb-2">
+      <label for="lastName">Apellidos</label>
+      <input pInputText id="lastName" formControlName="lastName"/>
+    </div>
+
+    <div class="flex flex-column gap-1 mb-2">
+      <label for="address">Dirección</label>
+      <input pInputText id="address" formControlName="address"/>
+    </div>
+
+    <div class="flex flex-column gap-1 mb-2">
+      <label for="email">Correo electrónico</label>
+      <input pInputText id="email" formControlName="email"/>
+    </div>
+
+    <div class="flex flex-column gap-1 mb-2">
+      <label for="password">Contraseña</label>
+      <p-password fluid [feedback]="false" formControlName="password" [toggleMask]="true" />
+    </div>
+
+    <div class="d-flex justify-content-end gap-2 pt-2">
+      <p-button label="Cancel" severity="secondary" (click)="visible = false" />
+      <p-button label="Save" (click)="onSubmit()" />
+    </div>
+
+  </form>
+</p-dialog>
