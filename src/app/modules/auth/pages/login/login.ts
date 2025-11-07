@@ -7,6 +7,7 @@ import {AuthService} from '../../../../shared/auth/services/auth-service';
 import {InputText} from 'primeng/inputtext';
 import {Password} from 'primeng/password';
 import {Button} from 'primeng/button';
+import {ToastService} from '../../../../core/services/toast-service';
 
 @Component({
   selector: 'app-login',
@@ -18,6 +19,7 @@ export class Login implements OnDestroy {
 
   private authService = inject(AuthService);
   private tokenService = inject(TokenService);
+  private toastService = inject(ToastService);
   private router = inject(Router);
 
   private loginSub: Subscription | undefined;
@@ -41,8 +43,12 @@ export class Login implements OnDestroy {
 
       this.authService.login(email, password).subscribe(
         (resp) => {
-          this.tokenService.save(resp.token);
-          this.router.navigate(['/home']);
+          if (resp) {
+            this.tokenService.save(resp.token);
+            this.router.navigate(['/home']);
+          } else {
+            this.toastService.showWarn('Usuario o contraseñas incorrectas, intente de nuevo');
+          }
         }
       );
       this.submitted = false;
