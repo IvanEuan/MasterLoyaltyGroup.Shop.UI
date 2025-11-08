@@ -1,7 +1,7 @@
 import {Component, inject, OnDestroy, OnInit, signal} from '@angular/core';
 import {Button} from "primeng/button";
 import {Card} from "primeng/card";
-import {DatePipe} from "@angular/common";
+import {CurrencyPipe, DatePipe} from "@angular/common";
 import {Dialog} from "primeng/dialog";
 import {IconField} from "primeng/iconfield";
 import {InputIcon} from "primeng/inputicon";
@@ -32,7 +32,8 @@ import {Store} from '../../../../shared/stores/models/store.model';
     ReactiveFormsModule,
     TableModule,
     InputNumber,
-    MultiSelect
+    MultiSelect,
+    CurrencyPipe
   ],
   templateUrl: './products.html',
   styleUrl: './products.css',

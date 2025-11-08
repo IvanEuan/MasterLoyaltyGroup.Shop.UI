@@ -22,6 +22,7 @@ export const appConfig: ApplicationConfig = {
       theme: {
         preset: Aura,
         options: {
+          primary: 'sky',
           darkModeSelector: false,
         }
       },

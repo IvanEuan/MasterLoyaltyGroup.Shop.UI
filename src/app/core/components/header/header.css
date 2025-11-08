@@ -1,8 +1,18 @@
 ::ng-deep .p-toolbar {
-  background: #1e3a8a !important; /* Azul rey oscuro */
+  background: #1e3a8a !important;
   border-color: #1e40af !important;
 }
 
 ::ng-deep .p-toolbar * {
   color: white !important;
 }
+
+::ng-deep .p-toolbar .p-button:hover {
+  background: rgba(30, 58, 138, 0.8) !important;
+}
+
+::ng-deep .p-toolbar .p-button:active,
+::ng-deep .p-toolbar .p-button:focus {
+  background: rgba(30, 58, 138, 0.9) !important;
+}
+

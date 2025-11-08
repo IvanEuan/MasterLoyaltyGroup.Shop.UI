@@ -8,10 +8,11 @@ import {InputText} from 'primeng/inputtext';
 import {Password} from 'primeng/password';
 import {Button} from 'primeng/button';
 import {ToastService} from '../../../../core/services/toast-service';
+import {Image} from 'primeng/image';
 
 @Component({
   selector: 'app-login',
-  imports: [ReactiveFormsModule, InputText, Password, Button],
+  imports: [ReactiveFormsModule, InputText, Password, Button, Image],
   templateUrl: './login.html',
   styleUrl: './login.css',
 })

@@ -13,16 +13,18 @@
     </div>
     @for (product of products(); track product.id) {
 
-      <div class="col-2">
+      <div class="col-3">
         <p-card>
           <ng-template #header>
-            <img alt="Card" class="w-full" [src]="product.image" />
+            <div class="d-flex justify-items-center pt-1">
+              <img [alt]="product.image" class="img-fluid rounded mx-auto" [src]="product.image" style="max-height: 150px"/>
+            </div>
           </ng-template>
           <div class="d-flex flex-column">
-            <div class="text-balance font-lg">
+            <div class="text-balance text-base">
               {{product.description}}
             </div>
-            <div class="font-bold font-lg">
+            <div class="font-bold text-xl">
               {{product.price | currency}}
             </div>
           </div>
